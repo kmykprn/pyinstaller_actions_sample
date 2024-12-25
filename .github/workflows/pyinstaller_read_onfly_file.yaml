@@ -4,7 +4,7 @@ run-name: ${{ github.actor }} is testing out Pyinstaller Actions
 on:
   push:
     paths:
-      - 'pyinstaller_actions_read_only_file.yaml'  # このファイルの変更時にトリガー
+      - '.github/workflows/pyinstaller_actions_read_only_file.yaml'  # このファイルの変更時にトリガー
       - 'src/read_only_file.py'                    # 関連するコード変更も許可
 
 jobs:
