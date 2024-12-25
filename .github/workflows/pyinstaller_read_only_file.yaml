@@ -24,4 +24,4 @@ jobs:
             spec: 'src/read_only_file.py'                   # specファイルか、pythonファイルを指定可能
             exe_path: './dist'
             upload_exe_with_name: 'Test Exe'                # artifact名？
-            options: --onefile, --name "My App", --windowed # pyinstaller側の設定
+            options: --onefile, --name "My App", --console  # pyinstaller側の設定
