@@ -1,0 +1,2 @@
+# pyinstaller_actions_sample
+pyinstallerのサンプルコード
