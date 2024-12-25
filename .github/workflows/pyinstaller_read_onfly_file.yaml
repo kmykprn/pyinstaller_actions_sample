@@ -11,7 +11,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [windows-latest]
+        os: [windows-latest, macos-latest]
 
     runs-on: ${{ matrix.os }} # <windows-latest / ubuntu-latest / ..... etc>
 
@@ -25,6 +25,13 @@ jobs:
         with:
             python_ver: '3.10'
             spec: 'src/read_only_file.py'                   # specファイルか、pythonファイルを指定可能
+            exe_path: './dist'
             upload_exe_with_name: 'Test Exe'                # artifact名？
             options: --onefile, --name "My App", --windowed # pyinstaller側の設定
-            is_uploaded: true
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ runner.os }} read file demo
+          path: ./dist
+          include-hidden-files: true
