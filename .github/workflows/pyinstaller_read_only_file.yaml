@@ -9,11 +9,8 @@ on:
 
 jobs:
   build:
-    strategy:
-      matrix:
-        os: [windows-latest, macos-latest]
 
-    runs-on: ${{ matrix.os }} # <windows-latest / ubuntu-latest / ..... etc>
+    runs-on: windows-latest
 
     steps:
       - name: Check-out repository
@@ -28,10 +25,3 @@ jobs:
             exe_path: './dist'
             upload_exe_with_name: 'Test Exe'                # artifact名？
             options: --onefile, --name "My App", --windowed # pyinstaller側の設定
-
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ runner.os }} read file demo
-          path: ./dist
-          include-hidden-files: true
