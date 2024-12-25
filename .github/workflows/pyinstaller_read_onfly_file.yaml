@@ -1,0 +1,30 @@
+name: Pyinstaller Actions Read Only File
+run-name: ${{ github.actor }} is testing out Pyinstaller Actions
+
+on:
+  push:
+    paths:
+      - 'pyinstaller_actions_read_only_file.yaml'  # このファイルの変更時にトリガー
+      - 'src/read_only_file.py'                    # 関連するコード変更も許可
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [windows-latest]
+
+    runs-on: ${{ matrix.os }} # <windows-latest / ubuntu-latest / ..... etc>
+
+    steps:
+      - name: Check-out repository
+        uses: actions/checkout@v4
+
+        # ここを改良
+      - name: Build Executable
+        uses: sayyid5416/pyinstaller@v1
+        with:
+            python_ver: '3.10'
+            spec: 'src/read_only_file.py'                   # specファイルか、pythonファイルを指定可能
+            upload_exe_with_name: 'Test Exe'                # artifact名？
+            options: --onefile, --name "My App", --windowed # pyinstaller側の設定
+            is_uploaded: true
