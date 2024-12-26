@@ -1,0 +1,27 @@
+name: Pyinstaller Actions Read My Package
+run-name: ${{ github.actor }} is testing out Pyinstaller Actions
+
+on:
+  push:
+    paths:
+      - '.github/workflows/pyinstaller_read_mypackage.yaml'  # このファイルの変更時にトリガー
+      - 'src/read_mypackage.py'                    # 関連するコード変更も許可
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+      - name: Check-out repository
+        uses: actions/checkout@v4
+
+        # ここを改良
+      - name: Build Executable
+        uses: sayyid5416/pyinstaller@v1
+        with:
+            python_ver: '3.10'
+            spec: 'src/read_mypackage.py'                   # specファイルか、pythonファイルを指定可能
+            exe_path: './dist'
+            upload_exe_with_name: 'read my package'         # artifact名？
+            options: --onefile, --name "App", --console     # pyinstaller側の設定
