@@ -30,7 +30,6 @@ pyinstaller＋Github Actionsを使ってコードをexeに変換するサンプ�
 - https://docs.github.com/en/actions/using-github-hosted-runners/using-github-hosted-runners/about-github-hosted-runners
 
 
-
 ## 依存関係を読み込むには？
 - コマンドラインで指定する
 - .specファイルを作成する
