@@ -30,3 +30,36 @@ pyinstaller＋Github Actionsを使ってコードをexeに変換するサンプ�
 - https://docs.github.com/en/actions/using-github-hosted-runners/using-github-hosted-runners/about-github-hosted-runners
 
 
+## 依存関係を読み込むには？
+- コマンドラインで指定する
+- .specファイルを作成する
+
+### specファイルを使ってみる
+- specファイルだけ作成する
+  - コマンド例：
+    - poetry run pyi-makespec src/read_mypackage.py --specpath spec/
+
+- 手動設定が必要そうな項目
+  - pathex: 
+    - モジュールやパッケージをインポートを検索するパスのリスト(PYTHONPATH)。
+    - コマンドラインから--pathsで指定した場合と同様。
+  - pure:
+    - メインスクリプト名.py
+  - biranies:
+    - pythonファイル以外のバイナリファイル
+    - コマンドラインから--add-binaryで指定した場合と同様。
+  - datas:
+    - pythonファイル以外の非バイナリファイル
+    - コマンドラインから--add-dataで指定した場合と同様。
+
+- pyinstallerにおけるバンドルとは：
+  - exeファイルや、必要なデータを一つのディレクトリにまとめることを指す(one-folderモード)
+  - 参考：
+
+- 参考：
+  - https://pyinstaller.org/en/stable/spec-files.html#using-spec-files
+  - https://pyinstaller.org/en/stable/operating-mode.html#bundling-to-one-folder
+
+
+## PYTHONPATHについて理解する
+- pythonのパスを設定する際、ルートディレクトリの情報も格納する必要がある。
