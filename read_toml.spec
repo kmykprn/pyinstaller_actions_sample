@@ -1,10 +1,63 @@
 # -*- mode: python ; coding: utf-8 -*-
 
 import os
+import sys
+
+def check_app_local():
+    if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
+        print('PyInstallerのバンドルで動作している')
+    else:
+        print('Pythonプロセスで動作している')
+
+def check_current_directory():
+    current_dir = os.getcwd()
+    print(f"コードを実行しているパス: {current_dir}")
+
+def display_directory_tree(path, prefix=""):
+    """
+    指定したディレクトリ配下の構造をツリー形式で表示する関数。
+    """
+    files = []
+    directories = []
+    
+    # ディレクトリ内のファイルとディレクトリを分けて取得
+    for item in os.listdir(path):
+        full_path = os.path.join(path, item)
+        if os.path.isdir(full_path):
+            directories.append(item)
+        else:
+            files.append(item)
+    
+    # ディレクトリを先に表示
+    for i, directory in enumerate(directories):
+        connector = "├── " if i < len(directories) - 1 or files else "└── "
+        print(f"{prefix}{connector}{directory}/")
+        new_prefix = f"{prefix}│   " if i < len(directories) - 1 or files else f"{prefix}    "
+        display_directory_tree(os.path.join(path, directory), new_prefix)
+    
+    # ファイルを表示
+    for i, file in enumerate(files):
+        connector = "└── " if i == len(files) - 1 else "├── "
+        print(f"{prefix}{connector}{file}")
+
+print("*********************************************")
+
+# exe上で実行されているかをチェック
+check_app_local()
+
+# カレントディレクトリを表示
+check_current_directory()
+
+# 現在のディレクトリのツリーを表示
+current_dir = os.getcwd()
+print(f"Directory tree for: {current_dir}\n")
+display_directory_tree(current_dir)
+print("*********************************************")
+
 
 a = Analysis(
     ['src/read_toml.py'],                     # specファイルの位置を基準とした相対パスを指定 
-    pathex=[".", "./src"],                    # sys.pathにパスを追加
+    pathex=["."],                    # sys.pathにパスを追加
     binaries=[],
     datas=[('config.toml', 'config.toml')],   # パス指定の方法はReadMeを参照。
     hiddenimports=[],
