@@ -1,11 +1,11 @@
 import tomli
 import time
-from check_app_local import check_app_local
+from src.check_app_local import check_app_local
 
 check_app_local()
 
 # TOML ファイルを読み込む
-with open("../config.toml", "rb") as f:
+with open("config.toml", "rb") as f:
     config = tomli.load(f)
 
 # データを確認
