@@ -32,10 +32,11 @@ pyinstaller＋Github Actionsを使ってコードをexeに変換するサンプ�
 
 
 ## 依存関係を読み込むには？
-- コマンドラインで指定する
-- .specファイルを作成する
+- 方法は2つ
+  - コマンドラインで指定する
+  - .specファイルを作成する
 
-### specファイルを使ってみる
+### specファイルの概要
 - specファイルだけ作成する
   - コマンド例：
     - poetry run pyi-makespec src/read_mypackage.py --specpath spec/
@@ -62,5 +63,18 @@ pyinstaller＋Github Actionsを使ってコードをexeに変換するサンプ�
   - https://pyinstaller.org/en/stable/operating-mode.html#bundling-to-one-folder
 
 
-## PYTHONPATHについて理解する
-- pythonのパスを設定する際、ルートディレクトリの情報も格納する必要がある。
+## specファイル上のパス設定のポイント
+- **specファイルの位置を基準**として、他のパッケージやデータを相対パスを指定する。
+  - 具体例：パス構成が以下のとき、config.tomlをexeファイルに組み込むには、specファイルに```datas=[('../config.toml', './')]```を指定する
+  ```
+  |-- myproject
+  |    |-- src
+  |    |   |-- main.py
+  |    |-- spec
+  |    |   |-- myspec.spec
+  |    |-- config.toml
+  ```
+  - 解説：
+    - ```('../config.toml', './')```の1項目は、specファイルを基準にした相対パスを指定する。
+    - 2項目は、```myproject```ディレクトリを基準とした相対パスを指定する。
+    - 
