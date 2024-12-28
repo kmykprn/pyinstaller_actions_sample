@@ -6,6 +6,7 @@ on:
     paths:
       - '.github/workflows/pyinstaller_read_toml_onefile.yaml'  # このファイルの変更時にトリガー
       - 'src/read_toml.py'                    # 関連するコード変更も許可
+      - 'spec/read_toml.spec'
 
 jobs:
   build:
