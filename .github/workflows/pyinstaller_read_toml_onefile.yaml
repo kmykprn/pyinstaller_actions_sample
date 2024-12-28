@@ -6,7 +6,7 @@ on:
     paths:
       - '.github/workflows/pyinstaller_read_toml_onefile.yaml'  # このファイルの変更時にトリガー
       - 'src/read_toml.py'                    # 関連するコード変更も許可
-      - 'spec/read_toml.spec'
+      - 'read_toml.spec'
 
 jobs:
   build:
@@ -48,6 +48,6 @@ jobs:
         uses: sayyid5416/pyinstaller@v1
         with:
             python_ver: '3.10'
-            spec: 'spec/read_toml.spec'                     # specファイルか、pythonファイルを指定可能
+            spec: 'read_toml.spec'                     # specファイルか、pythonファイルを指定可能
             exe_path: './dist'
             upload_exe_with_name: 'read toml'               # artifact名

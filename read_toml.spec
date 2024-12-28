@@ -2,18 +2,11 @@
 
 import os
 
-# spec ファイル自身のフルパスを取得
-spec_path = os.path.abspath(SPECPATH)
-print("spec_path: ", spec_path)
-
-# プロジェクト本体のパスを取得
-project_root = os.path.abspath(os.path.join(spec_path, '..'))
-
 a = Analysis(
-    ['../src/read_toml.py'],                     # specファイルの位置を基準とした相対パスを指定 
-    pathex=[project_root],                       # project_rootを追加
+    ['src/read_toml.py'],                     # specファイルの位置を基準とした相対パスを指定 
+    pathex=[],                                # project_rootを追加
     binaries=[],
-    datas=[('../config.toml', './config.toml')], # パス指定の方法はReadMeを参照。
+    datas=[('config.toml', 'config.toml')],   # パス指定の方法はReadMeを参照。
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
