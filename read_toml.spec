@@ -4,7 +4,7 @@ import os
 
 a = Analysis(
     ['src/read_toml.py'],                     # specファイルの位置を基準とした相対パスを指定 
-    pathex=[],                                # project_rootを追加
+    pathex=["."],                             # project_rootを追加
     binaries=[],
     datas=[('config.toml', 'config.toml')],   # パス指定の方法はReadMeを参照。
     hiddenimports=[],
