@@ -68,7 +68,7 @@ pyinstaller＋Github Actionsを使ってコードをexeに変換するサンプ�
 - Github Actionsにおいて、カレントディレクトリはプロジェクトのルートに設定されている。
   - 具体例：
     - パス構成が以下のとき、カレントディレクトリは```myproject```になる
-    - config.tomlをexeファイルに組み込むには、specファイルに```datas=[('config.toml', 'config.toml')]```を指定する
+    - config.tomlをexeファイルに組み込むには、specファイルに```datas=[('config.toml', './')]```を指定する
   ```
   |-- myproject
   |    |-- src
@@ -78,8 +78,9 @@ pyinstaller＋Github Actionsを使ってコードをexeに変換するサンプ�
   |    |-- config.toml
   ```
   - 解説：
-    - ```('config.toml', 'config.toml')```の1項目は、**カレントディレクトリを基準**にした相対パスを指定する。
-    - 2項目は、基本は1項目と同じでＯＫ。パスを変えたい場合だけ指定する。
+    - ```('config.toml', './')```の1項目は、**カレントディレクトリを基準**にした相対パスを指定する。
+    - 2項目は、プロジェクトのルートディレクトリを基準とした**ディレクトリの相対パスを指定**する。**ファイル名で指定してはだめ**
+      - 参考：https://github.com/pyinstaller/pyinstaller/issues/4532
 
 - exe化まで極力ミスを減らすためのステップ
   - ステップ1. ローカルのpythonでアプリを実行し、エラーが出ないことを確認する

@@ -63,7 +63,7 @@ a = Analysis(
     ['src/read_toml.py'],                     # specファイルの位置を基準とした相対パスを指定 
     pathex=["."],                             # sys.pathにパスを追加
     binaries=[],
-    datas=[('config.toml', 'config.toml')],   # パス指定の方法はReadMeを参照。
+    datas=[('config.toml', './')],   # パス指定の方法はReadMeを参照。
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
