@@ -77,4 +77,10 @@ pyinstaller＋Github Actionsを使ってコードをexeに変換するサンプ�
   - 解説：
     - ```('../config.toml', './')```の1項目は、specファイルを基準にした相対パスを指定する。
     - 2項目は、```myproject```ディレクトリを基準とした相対パスを指定する。
-    - 
+
+## pyproject.tomlからrequiremets.txtを生成する
+- [tool.poetry.dependencies]に記述しているもののみ出力させる場合
+  - ```poetry export -f requirements.txt -o requirements.txt --without-hashes```
+- [tool.poetry.group.dev.dependencies]のものを含める場合
+  - ```poetry export -f requirements.txt -o requirements.txt --without-hashes --with dev```
+- 参考：https://qiita.com/gabe-ds/items/d45f6c9ed497f40f6f49

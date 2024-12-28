@@ -25,7 +25,7 @@ jobs:
         # pyproject.tomlのうち必要なライブラリのみをrequirements_pyproject.tomlに変換する
       - name: Create requirements_pyproject.txt from pyproject.toml
         run: |
-          poetry export -f requirements.txt --output requirements_pyproject.txt --without-hashes --without dev
+          poetry export -f requirements.txt --output requirements_pyproject.txt --without-hashes
 
         # コードの実行に必要なパッケージのインストール
       - name: Install Dependencies
