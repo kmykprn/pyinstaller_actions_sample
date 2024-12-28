@@ -16,7 +16,24 @@ jobs:
       - name: Check-out repository
         uses: actions/checkout@v4
 
-        # ここを改良
+      - name: Install Poetry
+        run: |
+          python -m pip install --upgrade pip
+          pip install poetry
+          pip install poetry-plugin-export
+
+        # pyproject.tomlのうち必要なライブラリのみをrequirements_pyproject.tomlに変換する
+      - name: Create requirements_pyproject.txt from pyproject.toml
+        run: |
+          poetry export -f requirements.txt --output requirements_pyproject.txt --without-hashes --without dev
+
+        # コードの実行に必要なパッケージのインストール
+      - name: Install Dependencies
+        run: |
+          cat requirements_pyproject.txt
+          pip install -r requirements_pyproject.txt --trusted-host pypi.org
+
+        # コードをexe化
       - name: Build Executable
         uses: sayyid5416/pyinstaller@v1
         with:
