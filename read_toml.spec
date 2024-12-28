@@ -2,6 +2,10 @@
 
 import os
 import sys
+import io
+
+# 標準出力をUTF-8に設定
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
 def check_app_local():
     if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
