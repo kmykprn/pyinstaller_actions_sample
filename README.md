@@ -64,8 +64,11 @@ pyinstaller＋Github Actionsを使ってコードをexeに変換するサンプ�
 
 
 ## specファイル上のパス設定のポイント
-- **specファイルの位置を基準**として、他のパッケージやデータを相対パスを指定する。
-  - 具体例：パス構成が以下のとき、config.tomlをexeファイルに組み込むには、specファイルに```datas=[('../config.toml', './')]```を指定する
+- **カレントディレクトリ**を基準として、他のパッケージやデータを相対パスを指定する。
+- Github Actionsにおいて、カレントディレクトリはプロジェクトのルートに設定されている。
+  - 具体例：
+    - パス構成が以下のとき、カレントディレクトリは```myproject```になる
+    - config.tomlをexeファイルに組み込むには、specファイルに```datas=[('config.toml', 'config.toml')]```を指定する
   ```
   |-- myproject
   |    |-- src
@@ -75,8 +78,16 @@ pyinstaller＋Github Actionsを使ってコードをexeに変換するサンプ�
   |    |-- config.toml
   ```
   - 解説：
-    - ```('../config.toml', './')```の1項目は、specファイルを基準にした相対パスを指定する。
-    - 2項目は、```myproject```ディレクトリを基準とした相対パスを指定する。
+    - ```('config.toml', 'config.toml')```の1項目は、**カレントディレクトリを基準**にした相対パスを指定する。
+    - 2項目は、基本は1項目と同じでＯＫ。パスを変えたい場合だけ指定する。
+
+- exe化まで極力ミスを減らすためのステップ
+  - ステップ1. ローカルのpythonでアプリを実行し、エラーが出ないことを確認する
+    - **プロジェクトのルートの位置（例. myproject/）に移動する**
+    - pythonコマンドで直接アプリケーションを実行し、エラーがでないことを確認
+  - ステップ2. ローカルでpyinstallerを使ってアプリをexe化し、exeを実行してエラーが出ないことを確認
+  - ステップ3. github actionsでexe化し、exeを実行してエラーがでないことを確認
+
 
 ## pyproject.tomlからrequiremets.txtを生成する
 - [tool.poetry.dependencies]に記述しているもののみ出力させる場合
