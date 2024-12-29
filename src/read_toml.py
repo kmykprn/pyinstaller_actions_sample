@@ -1,10 +1,9 @@
 import tomli
 import time
-from check_debug import check_work_on_exe, check_current_directory, check_directory, read_file_from_exe
+from check_debug import check_work_on_exe, check_datas_imported, read_file_from_exe
 
 check_work_on_exe()
-check_current_directory()
-check_directory()
+check_datas_imported()
 
 filename = "config.toml"
 

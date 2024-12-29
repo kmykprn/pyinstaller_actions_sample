@@ -2,11 +2,12 @@ import sys
 import os
 import time
 
-def check_work_on_exe():
+def check_work_on_exe(logging=True):
 
     # exeファイル上で動作しているかを確認
     if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
-        print('PyInstallerのバンドルで動作している')
+        if logging:
+            print('PyInstallerのバンドルで動作している')
         return True
     else:
         print('Pythonプロセスで動作している')
@@ -19,7 +20,7 @@ def check_datas_imported():
     """
 
     # exeファイル上で動作しているかを確認
-    is_work_on_exe = check_work_on_exe()
+    is_work_on_exe = check_work_on_exe(logging=False)
     if is_work_on_exe:
 
         # sys._MEIPASSはexeを実行したときに展開されるディレクトリ。
@@ -33,10 +34,12 @@ def check_datas_imported():
         for item in items:
             print(f"- {item}")
         time.sleep(3)
+    else:
+        print("exe上で動作してません。ローカルディレクトリを使用します。")
 
 def read_file_from_exe(filename):
 
-    is_work_on_exe = check_work_on_exe()
+    is_work_on_exe = check_work_on_exe(logging=False)
     if is_work_on_exe:
 
         # exe実行時に一時的に展開されるディレクトリからファイルを参照
