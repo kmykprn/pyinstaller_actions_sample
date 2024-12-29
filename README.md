@@ -2,13 +2,12 @@
 pyinstaller＋Github Actionsを使ってコードをexeに変換するサンプルコード
 
 ## pyinstaller + Github Actionsの基本的な使い方
-### Github Actionsを実行するための準備
 - .github/workflowsディレクトリを作成
 - yamlファイルを作成（参照. .github/workflows/pyinstaller_read_only_file.yaml）
 - githubにpushする
 - Githubの「Actions」タブ上で、Workflowが動いていることを確認する。
 
-### Pyinstaller Actions
+### 参考：Pyinstaller Actions
 - https://github.com/marketplace/actions/pyinstaller-action
 - yaml本体：https://github.com/Martin005/pyinstaller-action/blob/main/action.yml
 
