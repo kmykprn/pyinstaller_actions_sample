@@ -7,7 +7,7 @@ pyinstaller＋Github Actionsを使ってコードをexeに変換するサンプ�
 - githubにpushする
 - Githubの「Actions」タブ上で、Workflowが動いていることを確認する。
 
-### 参考：Pyinstaller Actions
+### 参考：Pyinstaller Action
 - https://github.com/marketplace/actions/pyinstaller-action
 - yaml本体：https://github.com/Martin005/pyinstaller-action/blob/main/action.yml
 
