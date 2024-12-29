@@ -2,7 +2,7 @@
 
 
 a = Analysis(
-    ['src/read_toml.py'],                     # specファイルの位置を基準とした相対パスを指定 
+    ['src/read_toml.py'],                     # プロジェクトのルートを基準とした、アプリの相対パスを指定
     pathex=["."],                             # sys.pathにパスを追加
     binaries=[],
     datas=[('config.toml', './')],   # パス指定の方法はReadMeを参照。
