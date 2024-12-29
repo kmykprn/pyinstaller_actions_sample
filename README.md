@@ -31,10 +31,11 @@ pyinstaller＋Github Actionsを使ってコードをexeに変換するサンプ�
 
 
 ## 依存関係を読み込むには？
-- コマンドラインで指定する
-- .specファイルを作成する
+- 方法は2つ
+  - コマンドラインで指定する
+  - .specファイルを作成する
 
-### specファイルを使ってみる
+### specファイルの概要
 - specファイルだけ作成する
   - コマンド例：
     - poetry run pyi-makespec src/read_mypackage.py --specpath spec/
@@ -61,5 +62,36 @@ pyinstaller＋Github Actionsを使ってコードをexeに変換するサンプ�
   - https://pyinstaller.org/en/stable/operating-mode.html#bundling-to-one-folder
 
 
-## PYTHONPATHについて理解する
-- pythonのパスを設定する際、ルートディレクトリの情報も格納する必要がある。
+## specファイル上のパス設定のポイント
+- **カレントディレクトリ**を基準として、他のパッケージやデータを相対パスを指定する。
+- Github Actionsにおいて、カレントディレクトリはプロジェクトのルートに設定されている。
+  - 具体例：
+    - パス構成が以下のとき、カレントディレクトリは```myproject```になる
+    - config.tomlをexeファイルに組み込むには、specファイルに```datas=[('config.toml', './')]```を指定する
+  ```
+  |-- myproject
+  |    |-- src
+  |    |   |-- main.py
+  |    |-- spec
+  |    |   |-- myspec.spec
+  |    |-- config.toml
+  ```
+  - 解説：
+    - ```('config.toml', './')```の1項目は、**カレントディレクトリを基準**にした相対パスを指定する。
+    - 2項目は、プロジェクトのルートディレクトリを基準とした**ディレクトリの相対パスを指定**する。**ファイル名で指定してはだめ**
+      - 参考：https://github.com/pyinstaller/pyinstaller/issues/4532
+
+- exe化まで極力ミスを減らすためのステップ
+  - ステップ1. ローカルのpythonでアプリを実行し、エラーが出ないことを確認する
+    - **プロジェクトのルートの位置（例. myproject/）に移動する**
+    - pythonコマンドで直接アプリケーションを実行し、エラーがでないことを確認
+  - ステップ2. ローカルでpyinstallerを使ってアプリをexe化し、exeを実行してエラーが出ないことを確認
+  - ステップ3. github actionsでexe化し、exeを実行してエラーがでないことを確認
+
+
+## pyproject.tomlからrequiremets.txtを生成する
+- [tool.poetry.dependencies]に記述しているもののみ出力させる場合
+  - ```poetry export -f requirements.txt -o requirements.txt --without-hashes```
+- [tool.poetry.group.dev.dependencies]のものを含める場合
+  - ```poetry export -f requirements.txt -o requirements.txt --without-hashes --with dev```
+- 参考：https://qiita.com/gabe-ds/items/d45f6c9ed497f40f6f49
