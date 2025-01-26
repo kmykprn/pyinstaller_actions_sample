@@ -22,22 +22,11 @@ jobs:
             mkdir dist\test-dir
             echo. > dist\test-dir\empty.txt
 
-        # ここを改良
-      - name: Build Executable
-        uses: sayyid5416/pyinstaller@v1
-        with:
-            python_ver: '3.10'
-            spec: 'spec/app_to_exe.spec'                    # specファイルか、pythonファイルを指定可能
-            exe_path: './dist'
-            upload_exe_with_name: 'read my package'         # artifact名？
-            options: --onefile, --name "App", --console     # pyinstaller側の設定
-
-
         # Artifactに出力
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
             name: ${{ runner.os }} Read External Image
-            path: AllGame/App_ver/dist
+            path: dist
             compression-level: 9 # maximum compression
             include-hidden-files: true
