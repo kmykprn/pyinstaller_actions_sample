@@ -19,6 +19,7 @@ jobs:
       - name: make directory
         run: |
             mkdir -p ./dist/test-dir
+            echo "placeholder" > ./dist/test-dir/.keep
 
         # ここを改良
       - name: Build Executable
