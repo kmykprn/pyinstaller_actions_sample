@@ -18,7 +18,7 @@ jobs:
 
       - name: make directory
         run: |
-            mkdir dist\output\test-dir
+            mkdir -p ./dist/test-dir
 
         # ここを改良
       - name: Build Executable
