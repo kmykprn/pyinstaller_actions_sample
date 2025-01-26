@@ -1,10 +1,10 @@
-name: Pyinstaller Actions Read My Package
+name: Pyinstaller Make Directory
 run-name: ${{ github.actor }} is testing out Pyinstaller Actions
 
 on:
   push:
     paths:
-      - '.github/workflows/pyinstaller_read_mypackage.yaml'  # このファイルの変更時にトリガー
+      - '.github/workflows/pyinstaller_mkdir.yaml'  # このファイルの変更時にトリガー
       - 'src/read_mypackage.py'                    # 関連するコード変更も許可
 
 jobs:
