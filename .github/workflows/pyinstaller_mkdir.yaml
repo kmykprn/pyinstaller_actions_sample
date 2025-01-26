@@ -19,9 +19,7 @@ jobs:
       - name: make directory
         shell: cmd
         run: |
-            echo. > empty.txt
             mkdir dist\test-dir
-            cp empty.txt dist\test-dir
 
         # ここを改良
       - name: Build Executable
@@ -32,3 +30,13 @@ jobs:
             exe_path: './dist'
             upload_exe_with_name: 'read my package'         # artifact名？
             options: --onefile, --name "App", --console     # pyinstaller側の設定
+
+
+        # Artifactに出力
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+            name: ${{ runner.os }} Read External Image
+            path: AllGame/App_ver/dist
+            compression-level: 9 # maximum compression
+            include-hidden-files: true
