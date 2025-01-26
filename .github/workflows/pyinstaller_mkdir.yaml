@@ -19,8 +19,9 @@ jobs:
       - name: make directory
         shell: cmd
         run: |
+            echo. > empty.txt
             mkdir dist\test-dir
-            echo. > dist\test-dir\empty.txt
+            cp empty.txt dist\test-dir
 
         # ここを改良
       - name: Build Executable
